@@ -54,8 +54,12 @@
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('workflows_AS_Compromised_Machine_Tagging_name')]",
-            "location": "centralus",
+            "name": "[parameters('PlaybookName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/connections', variables('azuresentinel'))]",
+                "[resourceId('Microsoft.Web/connections', variables('wdatp'))]"
+            ],
             "properties": {
                 "state": "Enabled",
                 "definition": {
